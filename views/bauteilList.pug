@@ -1,0 +1,93 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous")
+        link(rel="stylesheet" href="/css/bauteilList.css")
+        title ES-Bauteileverwaltung
+    body
+        header
+            div(class="container-fluid  header")
+                div(class="row justify-content-between")
+                    a(class="col-6", href="/")
+                        div(class="row")
+                            img(src="/images/microchip.svg", alt="Logo", width="40", height="40")
+                            h1 ES-Bauteileverwaltung
+                    div(class="col")
+                        div(class="row justify-content-end")
+                            if userType == "administrator"
+                                a(class="hoverunderline" href="/benutzer") Benutzerliste anzeigen
+
+                            a(class="hoverunderline" href="/bauteile") Bauteile anzeigen
+                            a(class="hoverunderline" href="/ausleihauftraege") Ausleihauftraege anzeigen
+
+                            if userType == "studentuser"        
+                                a(class="hoverunderline" href="/warenkorb") Warekorb anzeigen
+
+                            p(class="margin-center")
+                                strong #{namen}
+
+                            a(class="hoverunderline" class="" href="/benutzer/ausloggen") Ausloggen
+
+        section
+            div(class="contrainer-fluid")
+                nav(class="navbar navbar-light bg-light")
+                    h2(class="navbar-brand heading-list") 
+                        strong Bauteile 
+                    form(class="form-inline")
+                        input(class="btn btn-outline-dark mr-4" id="button-neuesBauteil" type="button", value="Neues Bauteil hinzufügen")
+                        input(class="form-control input-dark mr-sm-2" type="search" placeholder="Suche" aria-label="Search")
+                        button(class="btn btn-outline-dark my-2 my-sm-0" type="submit") Suche
+                div(class="col mb-4")               
+                    div(class="border border-dark")
+                        div(class="row mx-1 mt-1 mb-3")
+                            div(class="col-2") Name
+                            div(class="col-4") Beschreibung
+                            div(class="col-2") Artikelnummer
+                            div(class="col-1") Verfügbar
+                        if bauteilList    
+                            each item in bauteilList
+                                li(class="row mx-1 my-2" key="" + item.id)
+                                    div(class="col-2") 
+                                        a(href="bauteile/" + item.id) #{item.name}
+                                    div(class="col-4") #{item.beschreibung}
+                                    div(class="col-2") #{item.artikelnummer}
+                                    div(class="col-1") #{item.anzahl}
+
+                                    if userType == "administrator"
+                                        div(class="col-3")
+                                            div(class="form-row")
+                                                div(class="col btn-centered")
+                                                    a(class="btn btn-outline-dark" href="/bauteile/bearbeiten/"+item.id) Bearbeiten
+                                                div(class="col btn-centered")
+                                                    input(class="btn btn-outline-dark" type="button", value="Löschen" key=""+item.id id="button-delete")
+
+                                    if userType == "studentuser"
+                                        form(action="" class="col-3")
+                                            div(class="form-row")
+                                                div(class="col number-input-div my-auto")
+                                                    input(class="number-input" type="number", value="1" min="1" max="10")
+                                                div(class="col")
+                                                    input(class="btn btn-outline-dark" type="button", value="Zum Warenkorb hinzufügen")
+                        else
+                            div(class="row mx-1 my-2") 
+                                div(class="col-2") Es gibt noch keine Bauteile.
+
+
+
+        footer(class="footer")
+            div(class="container")
+
+
+        script(src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous")
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous")
+        script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous")
+
+

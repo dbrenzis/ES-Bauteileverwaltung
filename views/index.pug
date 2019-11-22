@@ -1,0 +1,68 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous")
+        link(rel="stylesheet" href="/css/index.css")
+        title ES-Bauteileverwaltung
+    body
+        header
+            div(class="container-fluid  header")
+                div(class="row justify-content-between")
+                    a(class="col-6", href="/")
+                        div(class="row")
+                            img(src="/images/microchip.svg", alt="Logo", width="40", height="40")
+                            h1 ES-Bauteileverwaltung
+                    div(class="col")
+                        div(class="row justify-content-end")
+                            if userType == "administrator"
+                                a(class="hoverunderline" href="/benutzer") Benutzerliste anzeigen
+
+                            a(class="hoverunderline" href="/bauteile") Bauteile anzeigen
+                            a(class="hoverunderline" href="/ausleihauftraege") Ausleihauftraege anzeigen
+
+                            if userType == "studentuser"        
+                                a(class="hoverunderline" href="/warenkorb") Warekorb anzeigen
+
+                            p(class="margin-center")
+                                strong #{namen}
+
+                            a(class="hoverunderline" class="" href="/benutzer/ausloggen") Ausloggen
+
+        section
+            div(class="jumbotron infobox")
+                div(class="container")
+                    div( class="row justify-content-center")
+                        h2 Willkommen zur ES-Bauteileverwaltung
+                    div( class="row justify-content-center")
+                        if userType == "administrator"
+                            p Sie sind als <strong>Adminstrator</strong> angemeldet und haben die Recht dies und das zutun. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, consequatur! Impedit provident, earum sint, voluptatem corporis eos, vel magni cupiditate tempore perferendis molestiae! Aperiam alias, obcaecati illo hic dolores adipisci, sed debitis corporis inventore dignissimos sit tenetur explicabo incidunt. Sunt reprehenderit, animi aliquam amet cupiditate voluptate libero provident nobis inventore?
+                        if userType == "hiwi"
+                            p Sie sind als <strong>Hiwi</strong> angemeldet und haben die Recht dies und das zutun. Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore at neque nobis illo, esse ullam corrupti, ratione odit officiis, necessitatibus dolorem iusto incidunt debitis? Veritatis provident inventore explicabo dolore ipsa magnam repellendus, voluptates autem dolores sapiente facilis aspernatur a quaerat iste tenetur, officiis quae assumenda ratione eos natus vel perferendis?
+                        if userType == "studentUser"
+                            p Sie sind als <strong>Studentuser</strong> angemeldet und haben die Recht dies und das zutun. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempore, adipisci animi quod, rem aliquam, porro fugit tenetur tempora ex nesciunt quos recusandae itaque natus iusto! Iure assumenda alias optio molestiae magnam! Illo saepe quasi expedita quos debitis unde cum suscipit nam, aliquid architecto id dolorem quia fuga inventore. Labore, illum.
+                        p= teil2
+
+        footer(class="footer")
+            div(class="container")
+                
+
+
+
+
+
+
+
+
+        script(src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous")
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous")
+        script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous")
+
+

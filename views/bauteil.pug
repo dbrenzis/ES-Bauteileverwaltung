@@ -1,0 +1,83 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous")
+        link(rel="stylesheet" href="/css/bauteil.css")
+        title ES-Bauteileverwaltung
+    body
+        header
+            div(class="container-fluid  header")
+                div(class="row justify-content-between")
+                    a(class="col-6", href="/")
+                        div(class="row")
+                            img(src="/images/microchip.svg", alt="Logo", width="40", height="40")
+                            h1 ES-Bauteileverwaltung
+                    div(class="col")
+                        div(class="row justify-content-end")
+                            if userType == "administrator"
+                                a(class="hoverunderline" href="/benutzer") Benutzerliste anzeigen
+
+                            a(class="hoverunderline" href="/bauteile") Bauteile anzeigen
+                            a(class="hoverunderline" href="/ausleihauftraege") Ausleihauftraege anzeigen
+
+                            if userType == "studentuser"        
+                                a(class="hoverunderline" href="/warenkorb") Warekorb anzeigen
+
+                            p(class="margin-center")
+                                strong #{namen}
+
+                            a(class="hoverunderline" class="" href="/benutzer/ausloggen") Ausloggen
+
+        section
+            div(class="contrainer-fluid")
+                nav(class="navbar navbar-light bg-light")
+                    h2(class="navbar-brand heading-list") 
+                        strong Bauteile 
+                div(class="col mb-4")               
+                    div(class="border border-dark")
+                        div(class="row mx-1 mt-1 mb-3")
+                            div(class="col-2") 
+                                strong #{bauteil.name}
+                            div(class="col-2") Artikelnummer: #{bauteil.artikelnummer}
+                            div(class="col-2") Status: #{bauteil.status}
+                        div(class="row mx-2 my-2") Lagerort: #{bauteil.ortsangabe}
+                        div(class="row mx-2 my-2") Vorhandene Anzahl: #{bauteil.anzahl}
+                        div(class="row mx-2 my-2") Ausgeliehene Anzahl: #{anzahlausgeliehen}
+                        div(class="row mx-2 my-2") Beschreibung:
+                            div(class="mx-4 my-2") #{bauteil.beschreibung}
+                        div(class="border border-dark mx-2 my-2") Angehängte Dateien:
+                            div(class="mx-4 my-2")
+                                a(href="#") Bibliothekselement
+                            div(class="mx-4 my-2")
+                                a(href="#") Datenblatt
+                        div(class="form-row")
+                            div(class="col mx-2 my-2")
+                                input(class="btn btn-outline-dark" type="button", value="Bestandsmangel melden")
+                            div(class="col number-input-div my-auto")
+                                input(class="number-input" type="number", value="1" min="1" max="10")
+                            div(class="col mx-2 my-2")
+                                input(class="btn btn-outline-dark" type="button", value="Zum Warenkorb hinzufügen")
+
+
+
+                        
+
+
+
+        footer(class="footer")
+            div(class="container")
+
+
+        script(src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous")
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous")
+        script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous")
+
+
