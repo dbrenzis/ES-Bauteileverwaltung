@@ -1,0 +1,104 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous")
+        link(rel="stylesheet", href="/css/bootstrap/bootstrap.min.css")
+        link(rel="stylesheet" href="/css/ausleihauftragUpdate.css")
+        title ES-Bauteileverwaltung
+    body
+        header
+            div(class="container-fluid  header")
+                div(class="row justify-content-between")
+                    a(class="col-6", href="/")
+                        div(class="row")
+                            img(src="/images/microchip.svg", alt="Logo", width="40", height="40")
+                            h1 ES-Bauteileverwaltung
+                    div(class="col")
+                        div(class="row justify-content-end")
+                            if userType == "administrator"
+                                a(class="hoverunderline" href="/benutzer") Benutzerliste anzeigen
+
+                            a(class="hoverunderline" href="/bauteile") Bauteile anzeigen
+                            a(class="hoverunderline" href="/ausleihauftraege") Ausleihauftraege anzeigen
+
+                            if userType == "studentuser"        
+                                a(class="hoverunderline" href="/warenkorb") Warekorb anzeigen
+
+                            p(class="margin-center")
+                                strong #{namen}
+
+                            a(class="hoverunderline" class="" href="/benutzer/ausloggen") Ausloggen
+
+        section
+            div(class="contrainer-fluid")
+                nav(class="navbar navbar-light bg-light")
+                    h2(class="navbar-brand heading-list") 
+                        strong Ausleihauftrag 
+                div(class="col mb-4")               
+                    div(class="border border-dark")
+                        div(class="row mx-1 mt-1 mb-3")
+                            div(class="col-2")
+                                strong #{ausleihauftrag.auftragsnummer}
+                            div(class="col-2") Status: #{ausleihauftrag.status}
+                        div(class="row mx-2 my-2") Gruppenname: #{ausleihauftrag.gruppenname}
+                        div(class="row mx-2 my-2") Verantwortliches Teammitglied: #{ausleihauftrag.name}
+                        div(class="row mx-2 my-2") Verantwortlicher Betreuer: #{ausleihauftrag.betreuername}
+                        div(class="row mx-2 my-2") Ausleihfrist:
+                            input(class="ml-4" type="date" name="ausleihfrist" value=""+ausleihauftrag.frist)
+                        div(class="row mx-2 my-2")
+                            strong Bauteile:
+                        div(class="row mx-2 my-2")
+                            div(class="col mb-4")
+                                div(class="row mx-1 mt-1 mb-3")
+                                    div(class="col-2") Name
+                                    div(class="col-4") Beschreibung
+                                    div(class="col-2") Artikelnummer
+                                    div(class="col-1") Ausgeliehen
+                                if bauteilList    
+                                    each item in bauteilList
+                                        li(class="row mx-1 my-2" key="" + item.id)
+                                            div(class="col-2") #{item.name}
+                                            div(class="col-4") #{item.beschreibung}
+                                            div(class="col-2") #{item.artikelnummer}
+                                            div(class="col-1") #{item.anzahl}
+                                            form(action="" class="col-3")
+                                                div(class="form-row")
+                                                    div(class="col number-input-div my-auto")
+                                                        input(class="number-input" type="number", value="1" min="1" max=""+item.anzahl)
+                                                    div(class="col")
+                                                        input(class="btn btn-outline-dark" type="button", value="Rückgabe")
+
+                        div(class="row mr-4")
+                            div(class="col")
+                                div(class="row justify-content-end mb-2")
+                                    input(class="btn btn-outline-dark" type="button", value="Alles zurückgeben")
+
+                        div(class="border border-dark mx-2 my-2") 
+                            div(class="m-1") Kommentar:
+                            div(class="mx-4 my-2") #{ausleihauftrag.kommentar}
+                            
+                        div(class="form-row")
+                            div(class="col mx-2 my-2")
+                                input(class="btn btn-outline-dark" type="button", value="Speichern")
+                                input(class="btn btn-outline-dark mx-2" type="button", value="PDF-Erstellen")
+                            div(class="col mx-2 my-2")
+                                div(class="row justify-content-end mr-1")
+                                    a(href="/ausleihauftraege" class="btn btn-outline-dark") Verwerfen
+
+        footer(class="footer")
+            div(class="container")
+
+
+        script(src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous")
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous")
+        script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous")
+
+

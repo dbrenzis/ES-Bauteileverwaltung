@@ -5,7 +5,7 @@ html(lang="en")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous")
         link(rel="stylesheet", href="/css/bootstrap/bootstrap.min.css")
-        link(rel="stylesheet" href="/css/ausleihauftraegeList.css")
+        link(rel="stylesheet" href="/css/ausleihauftrag.css")
         title ES-Bauteileverwaltung
     body
         header
@@ -35,45 +35,37 @@ html(lang="en")
             div(class="contrainer-fluid")
                 nav(class="navbar navbar-light bg-light")
                     h2(class="navbar-brand heading-list") 
-                        strong Ausleihauftraege 
-                    form(class="form-inline")
-                        input(class="form-control input-dark mr-sm-2" type="search" placeholder="Suche" aria-label="Search")
-                        button(class="btn btn-outline-dark my-2 my-sm-0" type="submit") Suche
+                        strong Ausleihauftrag 
                 div(class="col mb-4")               
                     div(class="border border-dark")
                         div(class="row mx-1 mt-1 mb-3")
-                            div(class="col-2") Auftragsnummer
-                            div(class="col-2") Status
-                            div(class="col-2") Gruppenname
-                            div(class="col-1") Betreuername
-                        if ausleihauftraegeList    
-                            each item in ausleihauftraegeList
-                                li(class="row mx-1 my-2" key="" + item.id)
-                                    div(class="col-2") 
-                                        a(href="ausleihauftraege/" + item.id) #{item.auftragsnummer}
-                                    div(class="col-2") #{item.status}
-                                    div(class="col-2") #{item.gruppenname}
-                                    div(class="col-1") #{item.betreuername}
+                            div(class="col-2")
+                                strong #{ausleihauftrag.auftragsnummer}
+                            div(class="col-2") Status: #{ausleihauftrag.status}
+                        div(class="row mx-2 my-2") Gruppenname: #{ausleihauftrag.gruppenname}
+                        div(class="row mx-2 my-2") Verantwortliches Teammitglied: #{ausleihauftrag.name}
+                        div(class="row mx-2 my-2") Verantwortlicher Betreuer: #{ausleihauftrag.betreuername}
+                        div(class="row mx-2 my-2") Ausleihfrist: #{ausleihauftrag.frist}
+                        div(class="row mx-2 my-2")
+                            strong Bauteile:
+                        div(class="row mx-2 my-2")
+                            div(class="col mb-4")
+                                div(class="row mx-1 mt-1 mb-3")
+                                    div(class="col-2") Name
+                                    div(class="col-4") Beschreibung
+                                    div(class="col-2") Artikelnummer
+                                    div(class="col-1") Ausgeliehen
+                                if bauteilList    
+                                    each item in bauteilList
+                                        li(class="row mx-1 my-2" key="" + item.id)
+                                            div(class="col-2") #{item.name}
+                                            div(class="col-4") #{item.beschreibung}
+                                            div(class="col-2") #{item.artikelnummer}
+                                            div(class="col-1") #{item.anzahl}
 
-                                    if userType == "administrator" || userType == "hiwi"
-                                        if item.status == "angefragt"
-                                            div(class="col-3")
-                                                div(class="form-row")
-                                                    div(class="col btn-centered")
-                                                        a(class="btn btn-outline-dark" href="/ausleihauftraege/bearbeiten/"+item.id) Bestätigen
-                                                    div(class="col btn-centered")
-                                                        a(class="btn btn-outline-dark" href="/ausleihauftraege/bearbeiten/"+item.id) Ablehnen
-                                        if item.status == "ausgeliehen"
-                                            div(class="col-3")
-                                                div(class="form-row")
-                                                    div(class="col btn-centered")
-                                                        a(class="btn btn-outline-dark" href="/ausleihauftraege/bearbeiten/"+item.id) Bearbeiten
-
-                        else
-                            div(class="row mx-1 my-2") 
-                                div(class="col-2") Es gibt noch keine Ausleihaufträge.
-
-
+                        div(class="border border-dark mx-2 my-4") 
+                            div(class="m-1") Kommentar:
+                            div(class="mx-4 my-2") #{ausleihauftrag.kommentar}
 
         footer(class="footer")
             div(class="container")

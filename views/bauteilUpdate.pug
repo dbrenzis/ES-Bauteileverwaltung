@@ -39,41 +39,59 @@ html(lang="en")
                 div(class="col mb-4")               
                     div(class="border border-dark")
                         div(class="row mx-1 mt-1 mb-3")
-                            div(class="col-1") 
+                            div(class="col-2")
                                 strong Name:
-                            div(class="col-1") 
-                                input(type="text" value="" + bauteil.name)
-                            div(class="col-1") 
+                                input(class="mx-2" type="text" value="" + bauteil.name)
+                            div(class="col-3") 
                                 strong Artikelnummer:
-                            div(class="col-1") 
-                                input(type="text" value="" + bauteil.artikelnummer)
-                            div(class="col-1") 
-                                strong Status:
-                            div(class="col-1") 
-                                input(type="text" value="" + bauteil.status)
+                                input(class="mx-2" type="text" value="" + bauteil.artikelnummer)
+                            div(class="col-1")
+                                div(class="row justify-content-end")
+                                    strong Status:
+                            div(class="col")
+                                div(class="onoffswitch mx-2")
+                                    input(type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked)
+                                    label(class="onoffswitch-label" for="myonoffswitch")
+                                        span(class="onoffswitch-inner")
+                                        span(class="onoffswitch-switch")
+
                         div(class="row mx-2 my-2")
-                            strong Lagerort:
-                            input(type="text" value="" + bauteil.ortsangabe)
+                            div(class="col-2")
+                                strong Lagerort:
+                            div(class="col-2")
+                                input(type="text" value="" + bauteil.ortsangabe)
                         div(class="row mx-2 my-2")
-                            strong Vorhandene Anzahl:
-                            input(type="text" value="" + bauteil.anzahl)
+                            div(class="col-2")
+                                strong Vorhandene Anzahl:
+                            div(class="col-2")
+                                input(type="text" value="" + bauteil.anzahl)
                         div(class="row mx-2 my-2")
-                            strong Ausgeliehene Anzahl:
-                            input(type="text" value="" + anzahlausgeliehen)
-                        div(class="row mx-2 my-2") Beschreibung:
-                            textarea(class="mx-4 my-2" value="" + bauteil.beschreibung )
-                        div(class="border border-dark mx-2 my-2") Angehängte Dateien:
+                            div(class="col-2")
+                                strong Ausgeliehene Anzahl: 
+                            div(class="col-2")
+                                span #{anzahlausgeliehen}
+                        div(class="row mx-2 my-2") 
+                            div(class="col-2") 
+                                strong Beschreibung:
+                            div(class="col-4")
+                                textarea(class="mx-2 my-2" cols="80"  value="" + bauteil.beschreibung )
+
+                        div(class="border border-dark mx-4 my-2") Angehängte Dateien:
                             div(class="mx-4 my-2")
                                 a(href="#") Bibliothekselement
                             div(class="mx-4 my-2")
                                 a(href="#") Datenblatt
+                        form(class="form-row" action="", method="post")
+                            div(class="col my-2 ")
+                                div(class="row mr-4 justify-content-end")
+                                    input(class="btn btn-outline-dark" type="button", value="Dokumenthochladen")
+                        
                         div(class="form-row")
                             div(class="col mx-2 my-2")
                                 input(class="btn btn-outline-dark" type="button", value="Bestandsmangel melden")
-                            div(class="col number-input-div my-auto")
-                                input(class="number-input" type="number", value="1" min="1" max="10")
-                            div(class="col mx-2 my-2")
-                                input(class="btn btn-outline-dark" type="button", value="Zum Warenkorb hinzufügen")
+                            div(class="col mx-3 my-2 ")
+                                div(class="row justify-content-end")
+                                    a(href="/bauteile" class="btn btn-outline-dark") Verwerfen
 
 
 
