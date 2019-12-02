@@ -36,10 +36,9 @@ html(lang="en")
                 nav(class="navbar navbar-light bg-light")
                     h2(class="navbar-brand heading-list") 
                         strong Bauteile 
-                    form(class="form-inline")
-                        input(class="btn btn-outline-dark mr-4" id="button-neuesBauteil" type="button", value="Neues Bauteil hinzufügen")
-                        input(class="form-control input-dark mr-sm-2" type="search" placeholder="Suche" aria-label="Search")
-                        button(class="btn btn-outline-dark my-2 my-sm-0" type="submit") Suche
+                    div(class="form-inline")
+                        a(class="btn btn-outline-dark mx-2" href="/bauteile/bearbeiten/") Neues Bauteil hinzufügen
+                        input(class="form-control input-dark mr-sm-2" id="filterInput" type="search" placeholder="Suche" aria-label="Search")
                 div(class="col mb-4")               
                     div(class="border border-dark")
                         div(class="row mx-1 mt-1 mb-3")
@@ -47,33 +46,34 @@ html(lang="en")
                             div(class="col-4") Beschreibung
                             div(class="col-2") Artikelnummer
                             div(class="col-1") Verfügbar
-                        if bauteilList    
-                            each item in bauteilList
-                                li(class="row mx-1 my-2" key="" + item.id)
-                                    div(class="col-2") 
-                                        a(href="bauteile/" + item.id) #{item.name}
-                                    div(class="col-4") #{item.beschreibung}
-                                    div(class="col-2") #{item.artikelnummer}
-                                    div(class="col-1") #{item.anzahl}
+                        ul(class="pl-0" id="names")
+                            if bauteilList    
+                                each item in bauteilList
+                                    li(class="collection-item row mx-1 my-2" key="" + item.id)
+                                        div(class="col-2") 
+                                            a(href="bauteile/" + item.id) #{item.name}
+                                        div(class="col-4") #{item.beschreibung}
+                                        div(class="col-2") #{item.artikelNummer}
+                                        div(class="col-1") #{item.anzahl}
 
-                                    if userType == "administrator"
-                                        div(class="col-3")
-                                            div(class="form-row")
-                                                div(class="col btn-centered")
-                                                    a(class="btn btn-outline-dark" href="/bauteile/bearbeiten/"+item.id) Bearbeiten
-                                                div(class="col btn-centered")
-                                                    input(class="btn btn-outline-dark" type="button", value="Löschen" key=""+item.id id="button-delete")
+                                        if userType == "administrator"
+                                            div(class="col-3")
+                                                div(class="form-row")
+                                                    div(class="col btn-centered")
+                                                        a(class="btn btn-outline-dark" href="/bauteile/bearbeiten/"+item.id) Bearbeiten
+                                                    div(class="col btn-centered")
+                                                        input(class="btn btn-outline-dark" type="button", value="Löschen" key=""+item.id id="button-delete")
 
-                                    if userType == "studentuser"
-                                        form(action="" class="col-3")
-                                            div(class="form-row")
-                                                div(class="col number-input-div my-auto")
-                                                    input(class="number-input" type="number", value="1" min="1" max="10")
-                                                div(class="col")
-                                                    input(class="btn btn-outline-dark" type="button", value="Zum Warenkorb hinzufügen")
-                        else
-                            div(class="row mx-1 my-2") 
-                                div(class="col-2") Es gibt noch keine Bauteile.
+                                        if userType == "studentuser"
+                                            form(action="" class="col-3")
+                                                div(class="form-row")
+                                                    div(class="col number-input-div my-auto")
+                                                        input(class="number-input" type="number", value="1" min="1" max="10")
+                                                    div(class="col")
+                                                        input(class="btn btn-outline-dark" type="button", value="Zum Warenkorb hinzufügen")
+                            else
+                                div(class="row mx-1 my-2") 
+                                    div(class="col-2") Es gibt noch keine Bauteile.
 
 
 
@@ -90,5 +90,6 @@ html(lang="en")
         script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous")
+        script(type="text/javascript" src="/js/bauteilList.js")
 
 

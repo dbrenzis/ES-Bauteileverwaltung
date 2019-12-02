@@ -39,26 +39,43 @@ html(lang="en")
                 div(class="col mb-4")               
                     div(class="border border-dark")
                         div(class="row mx-1 mt-1 mb-3")
+                            div(class="col-3") 
+                                strong Name:
+                                span(class="ml-2") #{bauteil.name}
+                            div(class="col-3") 
+                                strong Artikelnummer: 
+                                span(class="ml-2") #{bauteil.artikelNummer}
                             div(class="col-2") 
-                                strong #{bauteil.name}
-                            div(class="col-2") Artikelnummer: #{bauteil.artikelnummer}
-                            div(class="col-2") Status: #{bauteil.status}
-                        div(class="row mx-2 my-2") Lagerort: #{bauteil.ortsangabe}
-                        div(class="row mx-2 my-2") Vorhandene Anzahl: #{bauteil.anzahl}
-                        div(class="row mx-2 my-2") Ausgeliehene Anzahl: #{anzahlausgeliehen}
-                        div(class="row mx-2 my-2") Beschreibung:
-                            div(class="mx-4 my-2") #{bauteil.beschreibung}
-                        div(class="border border-dark mx-2 my-2") Angehängte Dateien:
+                                strong Status:
+                                span(class="ml-2") #{bauteil.status}
+                        div(class="row mx-1 my-2")
+                            div(class="col-1")
+                                strong Lagerort:
+                            div(class="col-2 ml-2") #{bauteil.ortsangabe}
+                        div(class="row mx-1 my-2") 
+                            div(class="col-1")
+                                strong Vorhandene Anzahl:
+                            div(class="col-2 ml-2") #{bauteil.anzahl}
+                        div(class="row mx-1 my-2")
+                            div(class="col-1")
+                                strong Ausgeliehene Anzahl: 
+                            div(class="col-2 ml-2") #{anzahlausgeliehen}
+                        div(class="row mx-1 my-2") 
+                            div(class="col")
+                                Strong Beschreibung:
+                                div(class="mx-4 my-2") #{bauteil.beschreibung}
+                        div(class="border border-dark mx-3 my-2") 
+                            strong(class="ml-1") Angehängte Dateien:
                             div(class="mx-4 my-2")
                                 a(href="#") Bibliothekselement
                             div(class="mx-4 my-2")
                                 a(href="#") Datenblatt
                         div(class="form-row")
-                            div(class="col mx-2 my-2")
+                            div(class="col mx-3 my-2")
                                 input(class="btn btn-outline-dark" type="button", value="Bestandsmangel melden")
                             div(class="col number-input-div my-auto")
                                 input(class="number-input" type="number", value="1" min="1" max="10")
-                            div(class="col mx-2 my-2")
+                            div(class="col-2 mx-2 my-2")
                                 input(class="btn btn-outline-dark" type="button", value="Zum Warenkorb hinzufügen")
 
 
