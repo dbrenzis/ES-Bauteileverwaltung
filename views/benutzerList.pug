@@ -36,10 +36,9 @@ html(lang="en")
                 nav(class="navbar navbar-light bg-light")
                     h2(class="navbar-brand heading-list") 
                         strong Benutzer
-                    form(class="form-inline")
-                        input(class="btn btn-outline-dark mr-4" id="button-neuesBauteil" type="button", value="Neuen Benutzer hinzufügen")
-                        input(class="form-control input-dark mr-sm-2" type="search" placeholder="Suche" aria-label="Search")
-                        button(class="btn btn-outline-dark my-2 my-sm-0" type="submit") Suche
+                    div(class="form-inline")
+                        a(class="btn btn-outline-dark mr-4" id="button-neuesBauteil" href="/benutzer/bearbeiten/") Neuen Benutzer hinzufügen
+                        input(class="form-control input-dark mr-sm-2" type="search" placeholder="Suche" aria-label="Search" id="filterInput")
                 div(class="col mb-4")               
                     div(class="border border-dark")
                         div(class="row mx-1 mt-1 mb-3")
@@ -52,35 +51,37 @@ html(lang="en")
                                 strong Hiwis
                         hr
                         if benutzerList    
-                            each item in benutzerList
-                                if item.userType == "hiwi"
-                                    li(class="row mx-1 my-2" key="" + item.id)
-                                        div(class="col-2") #{item.name}
-                                        div(class="col-2") #{item.matrikelnummer}
-                                        div(class="col-2") #{item.email}
+                            ul(class="pl-0" id="names01")
+                                each item in benutzerList
+                                    if item.userType == "hiwi"
+                                        li(class="collection-item row mx-1 my-2" key="" + item.id)
+                                            div(class="col-2") #{item.name}
+                                            div(class="col-2") #{item.matrikelNummer}
+                                            div(class="col-2") #{item.email}
 
-                                        div(class="col")
-                                            div(class="form-row justify-content-end")
-                                                    input(class="btn btn-outline-dark mx-2" type="button", value="Zugansdaten anzeigen")
-                                                    a(href="/benutzer/"+item.id class="btn btn-outline-dark mx-2") Bearbeiten
-                                                    input(class="btn btn-outline-dark mx-2" type="button", value="Löschen" id="button-delete")
+                                            div(class="col")
+                                                div(class="form-row justify-content-end")
+                                                        input(class="btn btn-outline-dark mx-2" type="button", value="Zugansdaten anzeigen")
+                                                        a(href="/benutzer/bearbeiten/"+item.id class="btn btn-outline-dark mx-2") Bearbeiten
+                                                        input(class="btn btn-outline-dark mx-2" type="button" key=""+item.id value="Löschen" id="button-delete")
 
                             div(class="row mx-1 mt-4 mb-3 ")
                                 div(class="col-2") 
                                     strong StudentUser
                             hr
-                            each item in benutzerList
-                                if item.userType == "studentuser"
-                                    li(class="row mx-1 my-2" key="" + item.id)
-                                        div(class="col-2") #{item.name}
-                                        div(class="col-2") #{item.matrikelnummer}
-                                        div(class="col-2") #{item.email}
+                            ul(class="pl-0" id="names02")
+                                each item in benutzerList
+                                    if item.userType == "studentuser"
+                                        li(class="collection-item row mx-1 my-2" key="" + item.id)
+                                            div(class="col-2") #{item.name}
+                                            div(class="col-2") #{item.matrikelNummer}
+                                            div(class="col-2") #{item.email}
 
-                                        div(class="col")
-                                            div(class="form-row justify-content-end")
-                                                    input(class="btn btn-outline-dark mx-2" type="button", value="Zugansdaten anzeigen")
-                                                    a(href="/benutzer/"+item.id class="btn btn-outline-dark mx-2") Bearbeiten
-                                                    input(class="btn btn-outline-dark mx-2" type="button", value="Löschen" id="button-delete")
+                                            div(class="col")
+                                                div(class="form-row justify-content-end")
+                                                        input(class="btn btn-outline-dark mx-2" type="button", value="Zugansdaten anzeigen")
+                                                        a(href="/benutzer/bearbeiten/"+item.id class="btn btn-outline-dark mx-2") Bearbeiten
+                                                        input(class="btn btn-outline-dark mx-2" type="button" key=""+item.id value="Löschen" id="button-delete")
                         else
                             div(class="row mx-1 my-2") 
                                 div(class="col-2") Es gibt noch keine Benutzer.
@@ -100,5 +101,6 @@ html(lang="en")
         script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous")
+        script(type="text/javascript" src="/js/benutzerList.js")
 
 

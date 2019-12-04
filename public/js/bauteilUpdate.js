@@ -1,28 +1,31 @@
 document.getElementById('button-save').addEventListener('click', () => {
   const id = document.getElementById('button-save').getAttribute('key')
-  console.log('log')
 
-  const name = document.getElementById('name').getAttribute('value')
-  const artikelNummer = document.getElementById('artikelNummer').getAttribute('value')
-  const lagerort = document.getElementById('lagerort').getAttribute('value')
-  const anzahl = document.getElementById('anzahl').getAttribute('value')
-  const beschreibung = document.getElementById('beschreibung').getAttribute('value')
+  const name = document.getElementById('name').value
+  const artikelNummer = document.getElementById('artikelNummer').value
+  const lagerort = document.getElementById('lagerort').value
+  const anzahl = document.getElementById('anzahl').value
+  const beschreibung = document.getElementById('beschreibung').value
   var status = document.getElementById('status').checked
 
   if (status === true) { status = 'aktiviert' } else { status = 'deaktiviert' }
 
-  const formData = new FormData()
-  formData.append('name', name)
-  formData.append('artikelNummer', artikelNummer)
-  formData.append('lagerort', lagerort)
-  formData.append('anzahl', anzahl)
-  formData.append('beschreibung', beschreibung)
-  formData.append('status', status)
+  var formData = {
+    name: name,
+    artikelNummer: artikelNummer,
+    lagerort: lagerort,
+    anzahl: anzahl,
+    beschreibung: beschreibung,
+    status: status
+  }
 
   if (id === '') {
     fetch('/bauteile', {
       method: 'POST',
-      body: formData
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
     }).then(res => res.text())
       .then(res => {
         document.open()
@@ -32,7 +35,10 @@ document.getElementById('button-save').addEventListener('click', () => {
   } else {
     fetch('/bauteile/' + id, {
       method: 'PUT',
-      body: formData
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
     }).then(res => res.text())
       .then(res => {
         document.open()

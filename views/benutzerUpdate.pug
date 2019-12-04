@@ -32,104 +32,115 @@ html(lang="en")
                             a(class="hoverunderline" class="" href="/benutzer/ausloggen") Ausloggen
 
         section
-            div(class="contrainer")
+            div(class="contrainer w-50 mx-auto")
                 nav(class="navbar navbar-light bg-light")
                     h2(class="navbar-brand heading-list") 
                         strong Benutzer 
                 div(class="col mb-4")               
                     div(class="border border-dark")
                         if benutzer.userType == "hiwi"
-                            div(class="row mx-1 mt-1 mb-3")
-                                div(class="col")
+                            div(class="justify-content-center row mx-1 mt-1 mb-3")
+                                div(class="col-4")
                                     div(clas="row")
                                         strong Benutzertyp:
-                                div(class="col") 
+                                div(class="col-4") 
                                     div(clas="row")
                                         select(class="custom-select" id="inputGroupSelect01")
                                             option(value="studentuser") Studentuser
-                                            option(value="hiwi") Hiwi
-                            div(class="row mx-1 mt-1 mb-3")
-                                div(class="col")
-                                    div(clas="row")
-                                        strong Name:
-                                div(class="col") 
-                                    div(clas="row")
-                                        input(type="text" value="" + benutzer.name)
-                            div(class="row mx-1 mt-1 mb-3")
-                                div(class="col")
-                                    div(clas="row")
-                                        strong Matrikelnummer:
-                                div(class="col") 
-                                    div(clas="row")
-                                        input(type="text" value="" + benutzer.matrikelNummer)
-                            div(class="row mx-1 mt-1 mb-3")
-                                div(class="col")
-                                    div(clas="row")
-                                        strong E-Mail:
-                                div(class="col") 
-                                    div(clas="row")
-                                        input(type="text" value="" + benutzer.email)
-                            div(class="row mx-1 mt-1 mb-3")
-                                div(class="col")
-                                    div(clas="row")
-                                        strong Telefonnummer:
-                                div(class="col") 
-                                    div(clas="row")
-                                        input(type="text" value="" + benutzer.telefonNummer)
-                            div(class="row mx-1 mt-4 mb-3")            
-                                div(class="col btn-centered")
-                                    div(class="row justify-content-center")
-                                        input(class="btn btn-outline-dark" type="button", value="Benutzer anlegen/speichern" key=""+benutzer.id id="")
+                                            option(value="hiwi" selected="selected") Hiwi
 
-                        else
-                            div(class="row mx-1 mt-1 mb-3")
-                                div(class="col-6")
-                                    div(clas="row")
-                                        strong Benutzertyp:
-                                div(class="col") 
-                                    div(clas="row")
-                                        select(class="custom-select" id="inputGroupSelect01")
-                                            option(value="studentuser") Studentuser
-                                            option(value="hiwi") Hiwi
-                            div(class="row mx-1 mt-1 mb-3")
-                                div(class="col")
+                            div(class="justify-content-center row mx-1 mt-1 mb-3" id="gruppenNummerDiv" style="display:none;")
+                                div(class="col-4")
                                     div(clas="row")
                                         strong Gruppennummer:
-                                div(class="col") 
+                                div(class="col-4") 
                                     div(clas="row")
-                                        input(type="text" value="" + benutzer.gruppenNummer)
-                            div(class="row mx-1 mt-1 mb-3")
-                                div(class="col")
+                                        input(class="form-control" type="text" value="" + benutzer.gruppenNummer id="gruppenNummer")
+                            div(class="justify-content-center row mx-1 mt-1 mb-3")
+                                div(class="col-4")
                                     div(clas="row")
                                         strong Name:
-                                div(class="col") 
+                                div(class="col-4") 
                                     div(clas="row")
-                                        input(type="text" value="" + benutzer.name)
-                            div(class="row mx-1 mt-1 mb-3")
-                                div(class="col")
+                                        input(class="form-control" type="text" value="" + benutzer.name id="name")
+                            div(class="justify-content-center row mx-1 mt-1 mb-3")
+                                div(class="col-4")
                                     div(clas="row")
                                         strong Matrikelnummer:
-                                div(class="col") 
+                                div(class="col-4") 
                                     div(clas="row")
-                                        input(type="text" value="" + benutzer.matrikelNummer)
-                            div(class="row mx-1 mt-1 mb-3")
-                                div(class="col")
+                                        input(class="form-control" type="text" value="" + benutzer.matrikelNummer id="matrikelNummer")
+                            div(class="justify-content-center row mx-1 mt-1 mb-3")
+                                div(class="col-4")
                                     div(clas="row")
                                         strong E-Mail:
-                                div(class="col") 
+                                div(class="col-4") 
                                     div(clas="row")
-                                        input(type="text" value="" + benutzer.email)
-                            div(class="row mx-1 mt-1 mb-3")
-                                div(class="col")
+                                        input(class="form-control" type="text" value="" + benutzer.email id="email")
+                            div(class="justify-content-center row mx-1 mt-1 mb-3")
+                                div(class="col-4")
                                     div(clas="row")
                                         strong Telefonnummer:
-                                div(class="col") 
+                                div(class="col-4") 
                                     div(clas="row")
-                                        input(type="text" value="" + benutzer.telefonNummer)
+                                        input(class="form-control" type="text" value="" + benutzer.telefonNummer id="telefonNummer")
                             div(class="row mx-1 mt-4 mb-3")            
                                 div(class="col btn-centered")
                                     div(class="row justify-content-center")
-                                        input(class="btn btn-outline-dark" type="button", value="Benutzer anlegen/speichern" key=""+benutzer.id id="")
+                                        input(class="btn btn-outline-dark" type="button", value="Benutzer anlegen/speichern" key=""+benutzer.id id="button-save")
+
+                        else
+                            div(class="justify-content-center row mx-1 my-3")
+                                div(class="col-4")
+                                    div(clas="row")
+                                        strong Benutzertyp:
+                                div(class="col-4") 
+                                    div(clas="row")
+                                        select(class="custom-select" id="inputGroupSelect01")
+                                            option(value="studentuser" selected="selected") Studentuser
+                                            option(value="hiwi") Hiwi
+                            div(class="justify-content-center row mx-1 mt-1 mb-3" id="gruppenNummerDiv")
+                                div(class="col-4")
+                                    div(clas="row")
+                                        strong Gruppennummer:
+                                div(class="col-4") 
+                                    div(clas="row")
+                                        input(class="form-control" type="text" value="" + benutzer.gruppenNummer id="gruppenNummer")
+                            div(class="justify-content-center row mx-1 mt-1 mb-3")
+                                div(class="col-4")
+                                    div(clas="row")
+                                        strong Name:
+                                div(class="col-4") 
+                                    div(clas="row")
+                                        input(class="form-control" type="text" value="" + benutzer.name id="name")
+                            div(class="justify-content-center row mx-1 mt-1 mb-3")
+                                div(class="col-4")
+                                    div(clas="row")
+                                        strong Matrikelnummer:
+                                div(class="col-4") 
+                                    div(clas="row")
+                                        input(class="form-control" type="text" value="" + benutzer.matrikelNummer id="matrikelNummer")
+                            div(class="justify-content-center row mx-1 mt-1 mb-3")
+                                div(class="col-4")
+                                    div(clas="row")
+                                        strong E-Mail:
+                                div(class="col-4") 
+                                    div(clas="row")
+                                        input(class="form-control" type="text" value="" + benutzer.email id="email")
+                            div(class="justify-content-center row mx-1 mt-1 mb-3")
+                                div(class="col-4")
+                                    div(clas="row")
+                                        strong Telefonnummer:
+                                div(class="col-4") 
+                                    div(clas="row")
+                                        input(class="form-control" type="text" value="" + benutzer.telefonNummer id="telefonNummer")
+                            div(class="row mx-1 mt-4 mb-3")            
+                                div(class="col btn-centered")
+                                    div(class="row justify-content-center")
+                                        if benutzer.id 
+                                            input(class="btn btn-outline-dark" type="button", value="Benutzer anlegen/speichern" key=""+benutzer.id id="button-save")
+                                        else 
+                                            input(class="btn btn-outline-dark" type="button", value="Benutzer anlegen/speichern" key="" id="button-save")
 
         footer(class="footer")
             div(class="container")
@@ -144,5 +155,6 @@ html(lang="en")
         script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous")
+        script(type="text/javascript" src="/js/benutzerUpdate.js")
 
 

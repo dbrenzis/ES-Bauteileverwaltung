@@ -1,6 +1,8 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 
 app.set('view engine', 'pug')
 app.use(express.static('./public'))
@@ -10,12 +12,50 @@ app.get('/', (req, res) => {
   res.render('index', { namen: 'Daniel Brenzis', userType: 'administrator' })
 })
 
+app.post('/benutzer', (req, res) => {
+  res.send(req.body)
+})
+
+app.put('/benutzer/:id', (req, res) => {
+  res.send(req.body)
+})
+
+app.delete('/benutzer/:id', (req, res) => {
+  res.render('benutzerList', {
+    namen: 'Daniel Brenzis',
+    userType: 'administrator',
+    benutzerList: [
+      {
+        userType: 'hiwi',
+        id: 2,
+        name: 'Franz, Peter',
+        matrikelNummer: '123515123',
+        email: 'franz.peter@mail.de'
+      },
+      {
+        userType: 'studentuser',
+        id: 1,
+        name: 'Franz, Peter',
+        matrikelNummer: '123515123',
+        email: 'franz.peter@mail.de'
+      },
+      {
+        userType: 'studentuser',
+        id: 2,
+        name: 'Franz, Peter',
+        matrikelNummer: '123515123',
+        email: 'franz.peter@mail.de'
+      }
+    ]
+  })
+})
+
 app.post('/bauteile', (req, res) => {
-  res.send('Post')
+  res.send(req.body)
 })
 
 app.put('/bauteile/:id', (req, res) => {
-  res.send('Put')
+  res.send(req.body)
 })
 
 app.delete('/bauteile/:id', (req, res) => {
@@ -27,77 +67,77 @@ app.delete('/bauteile/:id', (req, res) => {
         id: 2,
         name: 'Artikel2',
         beschreibung: 'Das ist eine neue Bschreibung mit toller länge',
-        artikelnummer: '123-1234143',
+        artikelNummer: '123-1234143',
         anzahl: 16
       },
       {
         id: 1,
         name: 'Artikel1',
         beschreibung: 'Das ist eine neue Bschreibung mit toller länge',
-        artikelnummer: '123-1234143',
+        artikelNummer: '123-1234143',
         anzahl: 16
       },
       {
         id: 2,
         name: 'Artikel2',
         beschreibung: 'Das ist eine neue Bschreibung mit toller länge',
-        artikelnummer: '123-1234143',
+        artikelNummer: '123-1234143',
         anzahl: 16
       },
       {
         id: 1,
         name: 'Artikel1',
         beschreibung: 'Das ist eine neue Bschreibung mit toller länge',
-        artikelnummer: '123-1234143',
+        artikelNummer: '123-1234143',
         anzahl: 16
       },
       {
         id: 2,
         name: 'Artikel2',
         beschreibung: 'Das ist eine neue Bschreibung mit toller länge',
-        artikelnummer: '123-1234143',
+        artikelNummer: '123-1234143',
         anzahl: 16
       },
       {
         id: 1,
         name: 'Artikel1',
         beschreibung: 'Das ist eine neue Bschreibung mit toller länge',
-        artikelnummer: '123-1234143',
+        artikelNummer: '123-1234143',
         anzahl: 16
       },
       {
         id: 2,
         name: 'Artikel2',
         beschreibung: 'Das ist eine neue Bschreibung mit toller länge',
-        artikelnummer: '123-1234143',
+        artikelNummer: '123-1234143',
         anzahl: 16
       },
       {
         id: 1,
         name: 'Artikel1',
         beschreibung: 'Das ist eine neue Bschreibung mit toller länge',
-        artikelnummer: '123-1234143',
+        artikelNummer: '123-1234143',
         anzahl: 16
       },
       {
         id: 2,
         name: 'Artikel2',
         beschreibung: 'Das ist eine neue Bschreibung mit toller länge',
-        artikelnummer: '123-1234143',
+        artikelNummer: '123-1234143',
         anzahl: 16
       },
       {
         id: 2,
         name: 'Artikel2',
         beschreibung: 'Das ist eine neue Bschreibung mit toller länge',
-        artikelnummer: '123-1234143',
+        artikelNummer: '123-1234143',
         anzahl: 16
       },
       {
         id: 2,
         name: 'Artikel2',
         beschreibung: 'Das ist eine neue Bschreibung mit toller länge',
-        artikelnummer: '123-1234143',
+        artikelNummer: '123-1234143',
         anzahl: 16
       }
     ]
@@ -143,13 +183,28 @@ app.get('/benutzer/bearbeiten/:id', (req, res) => {
     namen: 'Daniel Brenzis',
     userType: 'administrator',
     benutzer: {
-      userType: 'studentuser',
+      userType: 'hiwi',
       id: 1,
       name: 'Frank, Peter',
       matrikelNummer: '123125124',
       email: '14512518123123',
       telefonNummer: '123124124',
       gruppenNummer: 'G-123A'
+    }
+  })
+})
+
+app.get('/benutzer/bearbeiten/', (req, res) => {
+  res.render('benutzerUpdate', {
+    namen: 'Daniel Brenzis',
+    userType: 'administrator',
+    benutzer: {
+      userType: 'studentuser',
+      name: '',
+      matrikelNummer: '',
+      email: '',
+      telefonNummer: '',
+      gruppenNummer: ''
     }
   })
 })
@@ -162,29 +217,29 @@ app.get('/benutzer', (req, res) => {
       {
         userType: 'hiwi',
         id: 1,
-        name: 'Franz, Peter',
-        matrikelnummer: '123515123',
+        name: 'Franz1, Peter',
+        matrikelNummer: '123515123',
         email: 'franz.peter@mail.de'
       },
       {
         userType: 'hiwi',
         id: 2,
         name: 'Franz, Peter',
-        matrikelnummer: '123515123',
+        matrikelNummer: '123515123',
         email: 'franz.peter@mail.de'
       },
       {
         userType: 'studentuser',
         id: 1,
         name: 'Franz, Peter',
-        matrikelnummer: '123515123',
+        matrikelNummer: '123515123',
         email: 'franz.peter@mail.de'
       },
       {
         userType: 'studentuser',
         id: 2,
         name: 'Franz, Peter',
-        matrikelnummer: '123515123',
+        matrikelNummer: '123515123',
         email: 'franz.peter@mail.de'
       }
     ]
@@ -204,84 +259,84 @@ app.get('/bauteile', (req, res) => {
         id: 1,
         name: 'Artikel1',
         beschreibung: 'Das ist eine neue Bschreibung mit toller länge',
-        artikelnummer: '123-1234143',
+        artikelNummer: '123-1234143',
         anzahl: 16
       },
       {
         id: 2,
         name: 'Artikel2',
         beschreibung: 'Das ist eine neue Bschreibung mit toller länge',
-        artikelnummer: '123-1234143',
+        artikelNummer: '123-1234143',
         anzahl: 16
       },
       {
         id: 1,
         name: 'Artikel1',
         beschreibung: 'Das ist eine neue Bschreibung mit toller länge',
-        artikelnummer: '123-1234143',
+        artikelNummer: '123-1234143',
         anzahl: 16
       },
       {
         id: 2,
         name: 'Artikel2',
         beschreibung: 'Das ist eine neue Bschreibung mit toller länge',
-        artikelnummer: '123-1234143',
+        artikelNummer: '123-1234143',
         anzahl: 16
       },
       {
         id: 1,
         name: 'Artikel1',
         beschreibung: 'Das ist eine neue Bschreibung mit toller länge',
-        artikelnummer: '123-1234143',
+        artikelNummer: '123-1234143',
         anzahl: 16
       },
       {
         id: 2,
         name: 'Artikel2',
         beschreibung: 'Das ist eine neue Bschreibung mit toller länge',
-        artikelnummer: '123-1234143',
+        artikelNummer: '123-1234143',
         anzahl: 16
       },
       {
         id: 1,
         name: 'Artikel1',
         beschreibung: 'Das ist eine neue Bschreibung mit toller länge',
-        artikelnummer: '123-1234143',
+        artikelNummer: '123-1234143',
         anzahl: 16
       },
       {
         id: 2,
         name: 'Artikel2',
         beschreibung: 'Das ist eine neue Bschreibung mit toller länge',
-        artikelnummer: '123-1234143',
+        artikelNummer: '123-1234143',
         anzahl: 16
       },
       {
         id: 1,
         name: 'Artikel1',
         beschreibung: 'Das ist eine neue Bschreibung mit toller länge',
-        artikelnummer: '123-1234143',
+        artikelNummer: '123-1234143',
         anzahl: 16
       },
       {
         id: 2,
         name: 'Artikel2',
         beschreibung: 'Das ist eine neue Bschreibung mit toller länge',
-        artikelnummer: '123-1234143',
+        artikelNummer: '123-1234143',
         anzahl: 16
       },
       {
         id: 2,
         name: 'Artikel2',
         beschreibung: 'Das ist eine neue Bschreibung mit toller länge',
-        artikelnummer: '123-1234143',
+        artikelNummer: '123-1234143',
         anzahl: 16
       },
       {
         id: 2,
         name: 'Artikel2',
         beschreibung: 'Das ist eine neue Bschreibung mit toller länge',
-        artikelnummer: '123-1234143',
+        artikelNummer: '123-1234143',
         anzahl: 16
       }
     ]
@@ -312,11 +367,14 @@ app.get('/ausleihauftraege/:id', (req, res) => {
     userType: 'administrator',
     ausleihauftrag: {
       id: 1,
-      auftragsnummer: 'A1901 - 12',
+      auftragsNummer: 'A1901 - 12',
       status: 'angefragt',
-      gruppenname: 'G12-A',
-      name: 'Paul Peter',
-      betreuername: 'Hiwi101',
+      studentuser_gruppenNummer: 'G12-A',
+      studentuser_name: 'Paul, Peter',
+      studentuser_email: 'Test@mail.de',
+      studentuser_telefonNummer: '10923812834',
+      studentuser_matrikelNummer: '109238834',
+      betreuer_name: 'Hiwi101',
       frist: '2019-11-27',
       kommentar:
         'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt dolorem officiis sapiente harum soluta expedita quo, accusamus impedit accusantium dolor?'
@@ -326,86 +384,24 @@ app.get('/ausleihauftraege/:id', (req, res) => {
         id: 1,
         name: 'Artikel1',
         beschreibung: 'Das ist eine neue Bschreibung mit toller länge',
-        artikelnummer: '123-1234143',
-        anzahl: 16
-      },
-      {
-        id: 2,
-        name: 'Artikel2',
-        beschreibung: 'Das ist eine neue Bschreibung mit toller länge',
-        artikelnummer: '123-1234143',
+        artikelNummer: '123-1234143',
         anzahl: 16
       },
       {
         id: 1,
         name: 'Artikel1',
         beschreibung: 'Das ist eine neue Bschreibung mit toller länge',
-        artikelnummer: '123-1234143',
-        anzahl: 16
-      },
-      {
-        id: 2,
-        name: 'Artikel2',
-        beschreibung: 'Das ist eine neue Bschreibung mit toller länge',
-        artikelnummer: '123-1234143',
+        artikelNummer: '123-1234143',
         anzahl: 16
       },
       {
         id: 1,
         name: 'Artikel1',
         beschreibung: 'Das ist eine neue Bschreibung mit toller länge',
-        artikelnummer: '123-1234143',
-        anzahl: 16
-      },
-      {
-        id: 2,
-        name: 'Artikel2',
-        beschreibung: 'Das ist eine neue Bschreibung mit toller länge',
-        artikelnummer: '123-1234143',
-        anzahl: 16
-      },
-      {
-        id: 1,
-        name: 'Artikel1',
-        beschreibung: 'Das ist eine neue Bschreibung mit toller länge',
-        artikelnummer: '123-1234143',
-        anzahl: 16
-      },
-      {
-        id: 2,
-        name: 'Artikel2',
-        beschreibung: 'Das ist eine neue Bschreibung mit toller länge',
-        artikelnummer: '123-1234143',
-        anzahl: 16
-      },
-      {
-        id: 1,
-        name: 'Artikel1',
-        beschreibung: 'Das ist eine neue Bschreibung mit toller länge',
-        artikelnummer: '123-1234143',
-        anzahl: 16
-      },
-      {
-        id: 2,
-        name: 'Artikel2',
-        beschreibung: 'Das ist eine neue Bschreibung mit toller länge',
-        artikelnummer: '123-1234143',
-        anzahl: 16
-      },
-      {
-        id: 2,
-        name: 'Artikel2',
-        beschreibung: 'Das ist eine neue Bschreibung mit toller länge',
-        artikelnummer: '123-1234143',
-        anzahl: 16
-      },
-      {
-        id: 2,
-        name: 'Artikel2',
-        beschreibung: 'Das ist eine neue Bschreibung mit toller länge',
-        artikelnummer: '123-1234143',
+        artikelNummer: '123-1234143',
         anzahl: 16
       }
+
     ]
   })
 })
@@ -416,11 +412,14 @@ app.get('/ausleihauftraege/bearbeiten/:id', (req, res) => {
     userType: 'administrator',
     ausleihauftrag: {
       id: 1,
-      auftragsnummer: 'A1901 - 12',
+      auftragsNummer: 'A1901 - 12',
       status: 'angefragt',
-      gruppenname: 'G12-A',
-      name: 'Paul Peter',
-      betreuername: 'Hiwi101',
+      studentuser_gruppenNummer: 'G12-A',
+      studentuser_name: 'Paul, Peter',
+      studentuser_email: 'Test@mail.de',
+      studentuser_telefonNummer: '10923812834',
+      studentuser_matrikelNummer: '109238834',
+      betreuer_name: 'Hiwi101',
       frist: '2019-11-27',
       kommentar:
         'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt dolorem officiis sapiente harum soluta expedita quo, accusamus impedit accusantium dolor?'
@@ -430,86 +429,24 @@ app.get('/ausleihauftraege/bearbeiten/:id', (req, res) => {
         id: 1,
         name: 'Artikel1',
         beschreibung: 'Das ist eine neue Bschreibung mit toller länge',
-        artikelnummer: '123-1234143',
-        anzahl: 16
-      },
-      {
-        id: 2,
-        name: 'Artikel2',
-        beschreibung: 'Das ist eine neue Bschreibung mit toller länge',
-        artikelnummer: '123-1234143',
+        artikelNummer: '123-1234143',
         anzahl: 16
       },
       {
         id: 1,
         name: 'Artikel1',
         beschreibung: 'Das ist eine neue Bschreibung mit toller länge',
-        artikelnummer: '123-1234143',
-        anzahl: 16
-      },
-      {
-        id: 2,
-        name: 'Artikel2',
-        beschreibung: 'Das ist eine neue Bschreibung mit toller länge',
-        artikelnummer: '123-1234143',
+        artikelNummer: '123-1234143',
         anzahl: 16
       },
       {
         id: 1,
         name: 'Artikel1',
         beschreibung: 'Das ist eine neue Bschreibung mit toller länge',
-        artikelnummer: '123-1234143',
-        anzahl: 16
-      },
-      {
-        id: 2,
-        name: 'Artikel2',
-        beschreibung: 'Das ist eine neue Bschreibung mit toller länge',
-        artikelnummer: '123-1234143',
-        anzahl: 16
-      },
-      {
-        id: 1,
-        name: 'Artikel1',
-        beschreibung: 'Das ist eine neue Bschreibung mit toller länge',
-        artikelnummer: '123-1234143',
-        anzahl: 16
-      },
-      {
-        id: 2,
-        name: 'Artikel2',
-        beschreibung: 'Das ist eine neue Bschreibung mit toller länge',
-        artikelnummer: '123-1234143',
-        anzahl: 16
-      },
-      {
-        id: 1,
-        name: 'Artikel1',
-        beschreibung: 'Das ist eine neue Bschreibung mit toller länge',
-        artikelnummer: '123-1234143',
-        anzahl: 16
-      },
-      {
-        id: 2,
-        name: 'Artikel2',
-        beschreibung: 'Das ist eine neue Bschreibung mit toller länge',
-        artikelnummer: '123-1234143',
-        anzahl: 16
-      },
-      {
-        id: 2,
-        name: 'Artikel2',
-        beschreibung: 'Das ist eine neue Bschreibung mit toller länge',
-        artikelnummer: '123-1234143',
-        anzahl: 16
-      },
-      {
-        id: 2,
-        name: 'Artikel2',
-        beschreibung: 'Das ist eine neue Bschreibung mit toller länge',
-        artikelnummer: '123-1234143',
+        artikelNummer: '123-1234143',
         anzahl: 16
       }
+
     ]
   })
 })
@@ -521,38 +458,61 @@ app.get('/ausleihauftraege', (req, res) => {
     ausleihauftraegeList: [
       {
         id: 1,
-        auftragsnummer: 'A1901 - 12',
+        auftragsNummer: 'A1901 - 12',
         status: 'angefragt',
-        gruppenname: 'G12-A',
-        betreuername: 'Hiwi101'
+        studentuser_gruppenNummer: 'G12-A',
+        betreuer_name: 'Hiwi101'
       },
       {
         id: 2,
-        auftragsnummer: 'A1901 - 13',
-        status: 'angefragt',
-        gruppenname: 'G12-A',
-        betreuername: 'Hiwi101'
-      },
-      {
-        id: 3,
-        auftragsnummer: 'A1901 - 12',
+        auftragsNummer: 'A1901 - 13',
         status: 'ausgeliehen',
-        gruppenname: 'G12-A',
-        betreuername: 'Hiwi101'
-      },
-      {
-        id: 4,
-        auftragsnummer: 'A1901 - 12',
-        status: 'zurückgegeben',
-        gruppenname: 'G12-A',
-        betreuername: 'Hiwi101'
+        studentuser_gruppenNummer: 'G12-A',
+        betreuer_name: 'Hiwi101'
       }
     ]
   })
 })
 
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
+app.delete('/ausleihauftraege/:id', (req, res) => {
+  res.render('ausleihauftraegeList', {
+    namen: 'Daniel Brenzis',
+    userType: 'administrator',
+    ausleihauftraegeList: [
+      {
+        id: 1,
+        auftragsNummer: 'A1901 - 12',
+        status: 'angefragt',
+        studentuser_gruppenNummer: 'G12-A',
+        betreuer_name: 'Hiwi101'
+      }
+    ]
+  })
+})
+
+app.put('/ausleihauftraege/:id', (req, res) => {
+  res.render('ausleihauftraegeList', {
+    namen: 'Daniel Brenzis',
+    userType: 'administrator',
+    ausleihauftraegeList: [
+      {
+        id: 1,
+        auftragsNummer: 'A1901 - 12',
+        status: 'ausgeliehen',
+        studentuser_gruppenNummer: 'G12-A',
+        betreuer_name: 'Hiwi101'
+      },
+      {
+        id: 2,
+        auftragsNummer: 'A1901 - 13',
+        status: 'ausgeliehen',
+        studentuser_gruppenNummer: 'G12-A',
+        betreuer_name: 'Hiwi101'
+      }
+    ]
+  })
+})
+
 app.use(require('./routes/routes'))
 
 const port = 5000

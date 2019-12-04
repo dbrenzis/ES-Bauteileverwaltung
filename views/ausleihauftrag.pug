@@ -39,15 +39,31 @@ html(lang="en")
                 div(class="col mb-4")               
                     div(class="border border-dark")
                         div(class="row mx-1 mt-1 mb-3")
-                            div(class="col-2")
-                                strong #{ausleihauftrag.auftragsnummer}
-                            div(class="col-2") Status: #{ausleihauftrag.status}
-                        div(class="row mx-2 my-2") Gruppenname: #{ausleihauftrag.gruppenname}
-                        div(class="row mx-2 my-2") Verantwortliches Teammitglied: #{ausleihauftrag.name}
-                        div(class="row mx-2 my-2") Verantwortlicher Betreuer: #{ausleihauftrag.betreuername}
-                        div(class="row mx-2 my-2") Ausleihfrist: #{ausleihauftrag.frist}
-                        div(class="row mx-2 my-2")
-                            strong Bauteile:
+                            div(class="col-3") 
+                                strong Name:
+                                span(class="ml-2") #{ausleihauftrag.auftragsNummer}
+                            div(class="col-2") 
+                                strong Status:
+                                span(class="ml-2") #{ausleihauftrag.status}
+                        div(class="row mx-1 my-2")
+                            div(class="col-3")
+                                strong Gruppenname:
+                            div(class="col-2 ml-2") #{ausleihauftrag.studentuser_gruppenNummer}
+                        div(class="row mx-1 my-2")
+                            div(class="col-3")
+                                strong Verantwortliches Teammitglied:
+                            div(class="col-2 ml-2") #{ausleihauftrag.studentuser_name}
+                        div(class="row mx-1 my-2")
+                            div(class="col-3")
+                                strong Verantwortliches Betreuer:
+                            div(class="col-2 ml-2") #{ausleihauftrag.betreuer_name}
+                        div(class="row mx-1 my-2")
+                            div(class="col-3")
+                                strong Ausleihfrist:
+                            div(class="col-2 ml-2") #{ausleihauftrag.frist}
+                        div(class="row mx-1 mt-4 mb-2")
+                            div(class="col")
+                                strong Bauteile:
                         div(class="row mx-2 my-2")
                             div(class="col mb-4")
                                 div(class="row mx-1 mt-1 mb-3")
@@ -60,11 +76,10 @@ html(lang="en")
                                         li(class="row mx-1 my-2" key="" + item.id)
                                             div(class="col-2") #{item.name}
                                             div(class="col-4") #{item.beschreibung}
-                                            div(class="col-2") #{item.artikelnummer}
+                                            div(class="col-2") #{item.artikelNummer}
                                             div(class="col-1") #{item.anzahl}
-
-                        div(class="border border-dark mx-2 my-4") 
-                            div(class="m-1") Kommentar:
+                        div(class="border border-dark mx-3 mt-2 mb-4") 
+                            strong(class="ml-1") Kommentar:
                             div(class="mx-4 my-2") #{ausleihauftrag.kommentar}
 
         footer(class="footer")

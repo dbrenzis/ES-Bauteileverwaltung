@@ -39,16 +39,44 @@ html(lang="en")
                 div(class="col mb-4")               
                     div(class="border border-dark")
                         div(class="row mx-1 mt-1 mb-3")
-                            div(class="col-2")
-                                strong #{ausleihauftrag.auftragsnummer}
-                            div(class="col-2") Status: #{ausleihauftrag.status}
-                        div(class="row mx-2 my-2") Gruppenname: #{ausleihauftrag.gruppenname}
-                        div(class="row mx-2 my-2") Verantwortliches Teammitglied: #{ausleihauftrag.name}
-                        div(class="row mx-2 my-2") Verantwortlicher Betreuer: #{ausleihauftrag.betreuername}
-                        div(class="row mx-2 my-2") Ausleihfrist:
-                            input(class="ml-4" type="date" name="ausleihfrist" value=""+ausleihauftrag.frist)
-                        div(class="row mx-2 my-2")
-                            strong Bauteile:
+                            div(class="col-3") 
+                                strong Name:
+                                span(class="ml-2") #{ausleihauftrag.auftragsNummer}
+                            div(class="col-2") 
+                                strong Status:
+                                span(class="ml-2") #{ausleihauftrag.status}
+                        div(class="row mx-1 my-2")
+                            div(class="col-3")
+                                strong Gruppenname:
+                            div(class="col-2 ml-2") #{ausleihauftrag.studentuser_gruppenNummer}
+                        div(class="row mx-1 my-2")
+                            div(class="col-3")
+                                strong Verantwortliches Teammitglied:
+                            div(class="col-2 ml-2") #{ausleihauftrag.studentuser_name}
+                        div(class="row mx-1 my-2")
+                            div(class="col-3")
+                                strong E-Mail:
+                            div(class="col-2 ml-2") #{ausleihauftrag.studentuser_email}
+                        div(class="row mx-1 my-2")
+                            div(class="col-3")
+                                strong Telefonnummer:
+                            div(class="col-2 ml-2") #{ausleihauftrag.studentuser_telefonNummer}
+                        div(class="row mx-1 my-2")
+                            div(class="col-3")
+                                strong Matrikelnummer:
+                            div(class="col-2 ml-2") #{ausleihauftrag.studentuser_matrikelNummer}
+                        div(class="row mx-1 my-2")
+                            div(class="col-3")
+                                strong Verantwortliches Betreuer:
+                            div(class="col-2 ml-2") #{ausleihauftrag.betreuer_name}
+                        div(class="row mx-1 my-2")
+                            div(class="col-3")
+                                strong Ausleihfrist:
+                            div(class="col-2 ml-2") 
+                                input(type="date" name="ausleihfrist" value="" + ausleihauftrag.frist id="frist")
+                        div(class="row mx-1 mt-4 mb-2")
+                            div(class="col")
+                                strong Bauteile:
                         div(class="row mx-2 my-2")
                             div(class="col mb-4")
                                 div(class="row mx-1 mt-1 mb-3")
@@ -61,32 +89,27 @@ html(lang="en")
                                         li(class="row mx-1 my-2" key="" + item.id)
                                             div(class="col-2") #{item.name}
                                             div(class="col-4") #{item.beschreibung}
-                                            div(class="col-2") #{item.artikelnummer}
+                                            div(class="col-2") #{item.artikelNummer}
                                             div(class="col-1") #{item.anzahl}
                                             form(action="" class="col-3")
                                                 div(class="form-row")
                                                     div(class="col number-input-div my-auto")
                                                         input(class="number-input" type="number", value="1" min="1" max=""+item.anzahl)
                                                     div(class="col")
-                                                        input(class="btn btn-outline-dark" type="button", value="Rückgabe")
-
-                        div(class="row mr-4")
-                            div(class="col")
-                                div(class="row justify-content-end mb-2")
-                                    input(class="btn btn-outline-dark" type="button", value="Alles zurückgeben")
-
-                        div(class="border border-dark mx-2 my-2") 
-                            div(class="m-1") Kommentar:
+                                                        input(class="btn btn-outline-dark" type="button" auftragid=""+ausleihauftrag.id bauteilid=""+item.id value="Rückgabe")
+                        div(class="row mx-3 mt-2 mb-4 justify-content-end")
+                            input(class="btn btn-outline-dark" type="button", value="Alles zurückgeben")
+                        div(class="border border-dark mx-3 mt-2 mb-4") 
+                            strong(class="ml-1") Kommentar:
                             div(class="mx-4 my-2") #{ausleihauftrag.kommentar}
-                            
-                        div(class="form-row")
-                            div(class="col mx-2 my-2")
-                                input(class="btn btn-outline-dark" type="button", value="Speichern")
-                                input(class="btn btn-outline-dark mx-2" type="button", value="PDF-Erstellen")
-                            div(class="col mx-2 my-2")
-                                div(class="row justify-content-end mr-1")
-                                    a(href="/ausleihauftraege" class="btn btn-outline-dark") Verwerfen
-
+                        div(class="row mx-3 mt-2 mb-4")
+                            div(class="col-3")
+                                div(class="row")
+                                    input(class="btn btn-outline-dark" type="button", value="Speichern" id="button-save" key=""+ausleihauftrag.id)
+                                    input(class="btn btn-outline-dark mx-2" type="button", value="PDF-Erstellen")
+                            div(class="col")
+                                div(class="row justify-content-end")
+                                    a(href="/ausleihauftraege" class="btn btn-outline-dark mr-0") Verwerfen
         footer(class="footer")
             div(class="container")
 
@@ -100,5 +123,6 @@ html(lang="en")
         script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous")
+        script(type="text/javascript" src="/js/ausleihauftragUpdate.js")
 
 

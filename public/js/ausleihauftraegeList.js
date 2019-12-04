@@ -1,9 +1,25 @@
-
 document.getElementById('button-delete').addEventListener('click', () => {
   const id = document.getElementById('button-delete').getAttribute('key')
-  const url = '/bauteile/' + id
+  const url = '/ausleihauftraege/' + id
   fetch(url, {
     method: 'DELETE'
+  }).then(res => res.text())
+    .then(res => {
+      document.open()
+      document.write(res)
+      document.close()
+    })
+})
+
+document.getElementById('button-accept').addEventListener('click', () => {
+  const id = document.getElementById('button-accept').getAttribute('key')
+  const url = '/ausleihauftraege/' + id
+  fetch(url, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ status: 'ausgeliehen' })
   }).then(res => res.text())
     .then(res => {
       document.open()

@@ -36,9 +36,8 @@ html(lang="en")
                 nav(class="navbar navbar-light bg-light")
                     h2(class="navbar-brand heading-list") 
                         strong Ausleihauftraege 
-                    form(class="form-inline")
-                        input(class="form-control input-dark mr-sm-2" type="search" placeholder="Suche" aria-label="Search")
-                        button(class="btn btn-outline-dark my-2 my-sm-0" type="submit") Suche
+                    div(class="form-inline")
+                        input(class="form-control input-dark mr-sm-2" type="search" placeholder="Suche" aria-label="Search" id="filterInput")
                 div(class="col mb-4")               
                     div(class="border border-dark")
                         div(class="row mx-1 mt-1 mb-3")
@@ -47,27 +46,28 @@ html(lang="en")
                             div(class="col-2") Gruppenname
                             div(class="col-1") Betreuername
                         if ausleihauftraegeList    
-                            each item in ausleihauftraegeList
-                                li(class="row mx-1 my-2" key="" + item.id)
-                                    div(class="col-2") 
-                                        a(href="ausleihauftraege/" + item.id) #{item.auftragsnummer}
-                                    div(class="col-2") #{item.status}
-                                    div(class="col-2") #{item.gruppenname}
-                                    div(class="col-1") #{item.betreuername}
+                            ul(class="pl-0" id="names")
+                                each item in ausleihauftraegeList
+                                    li(class="collection-item row mx-1 my-2" key="" + item.id)
+                                        div(class="col-2") 
+                                            a(href="ausleihauftraege/" + item.id) #{item.auftragsNummer}
+                                        div(class="col-2") #{item.status}
+                                        div(class="col-2") #{item.studentuser_gruppenNummer}
+                                        div(class="col-1") #{item.betreuer_name}
 
-                                    if userType == "administrator" || userType == "hiwi"
-                                        if item.status == "angefragt"
-                                            div(class="col-3")
-                                                div(class="form-row")
-                                                    div(class="col btn-centered")
-                                                        a(class="btn btn-outline-dark" href="/ausleihauftraege/bearbeiten/"+item.id) Bestätigen
-                                                    div(class="col btn-centered")
-                                                        a(class="btn btn-outline-dark" href="/ausleihauftraege/bearbeiten/"+item.id) Ablehnen
-                                        if item.status == "ausgeliehen"
-                                            div(class="col-3")
-                                                div(class="form-row")
-                                                    div(class="col btn-centered")
-                                                        a(class="btn btn-outline-dark" href="/ausleihauftraege/bearbeiten/"+item.id) Bearbeiten
+                                        if userType == "administrator" || userType == "hiwi"
+                                            if item.status == "angefragt"
+                                                div(class="col")
+                                                    div(class="row justify-content-center")
+                                                        div(class="col-2 btn-centered")
+                                                            input(type="button" class="btn btn-outline-dark" key=""+item.id id="button-accept" value="Bestätigen") 
+                                                        div(class="col-2 btn-centered")
+                                                            input(type="button" class="btn btn-outline-dark" key=""+item.id id="button-delete" value="Ablehnen") 
+                                            if item.status == "ausgeliehen"
+                                                div(class="col")
+                                                    div(class="row justify-content-center")
+                                                        div(class="col-2 btn-centered")
+                                                            a(class="btn btn-outline-dark" href="/ausleihauftraege/bearbeiten/"+item.id) Bearbeiten
 
                         else
                             div(class="row mx-1 my-2") 
@@ -88,5 +88,6 @@ html(lang="en")
         script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous")
+        script(type="text/javascript" src="/js/ausleihauftraegeList.js")
 
 
